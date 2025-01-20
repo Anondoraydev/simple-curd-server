@@ -38,6 +38,20 @@ async function run() {
             res.send(result)
         })
 
+        app.get('/users/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: new ObjectId(id) }
+            const user = await usersCollection.findOne(query)
+            res.send(user)
+        })
+
+        app.put('/users/:id', async (req, res) => {
+            const id = req.params.id;
+            const updatetedUser = req.body;
+            console.log(id, updatetedUser);
+
+        })
+
         app.post('/users', async (req, res) => {
             const user = req.body;
             console.log('new user', user);
@@ -45,12 +59,12 @@ async function run() {
             res.send(result)
         })
 
-        app.delete(('/users/:id'), async(req, res) => {
+        app.delete(('/users/:id'), async (req, res) => {
             const id = req.params.id
             console.log('please delete frome database ', id);
-            const qurery ={_id :new ObjectId(id)}
-            const result =await usersCollection.deleteOne(qurery)
-            res.send(result )
+            const qurery = { _id: new ObjectId(id) }
+            const result = await usersCollection.deleteOne(qurery)
+            res.send(result)
 
         })
 
